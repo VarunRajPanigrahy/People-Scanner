@@ -20,44 +20,46 @@ def similarity(img1,img2):
 	contrast = cv2.cvtColor(contrast, cv2.COLOR_BGR2GRAY)
 	return(compare_images(original, contrast))
 
+def predict_faces():
+	while(True):
+		folder="CTD"
+		test_imgs_list=os.listdir(folder)
+		if(len(test_imgs_list)==0): break
 
-while(True):
-	folder="CTD"
-	test_imgs_list=os.listdir(folder)
-	if(len(test_imgs_list)==0): break
+		img_path="CTD/"+test_imgs_list[0]
+		max_sim=0.40
+		name="None"
+		max_now=0
+		students=os.listdir("Training Data")
+		for s in students:
+			imgs=os.listdir("Training Data/%s"%(s))
+			for i in imgs:
+				img="Training Data/%s/%s"%(s,i)
+				sim_now=similarity(img_path,img)
+				if(sim_now>max_sim):
+					max_now=sim_now
+					name=s
+		if(max_now>max_sim):max_sim=max_now
+		print(img_path,max_sim,name,max_now)
+		os.remove(img_path)
+		if(name==None):continue
+		file=open('Attendance.txt','r')
+		present=dict()
+		for line in file:
+			if(line):
+				stu=line.split(" ")[0]
+				sta=line.split(" ")[1]
+				present[stu]=sta
 
-	img_path="CTD/"+test_imgs_list[0]
-	max_sim=0.46
-	name="None"
-	students=os.listdir("Training Data")
-	for s in students:
-		imgs=os.listdir("Training Data/%s"%(s))
-		for i in imgs:
-			img="Training Data/%s/%s"%(s,i)
-			sim_now=similarity(img_path,img)
-			if(sim_now>max_sim):
-				max_sim=sim_now
-				name=s
-	print(img_path,max_sim,name)
-	os.remove(img_path)
-	if(name==None):continue
-	file=open('Attendance.txt','r')
-	present=dict()
-	for line in file:
-		if(line):
-			stu=line.split(" ")[0]
-			sta=line.split(" ")[1]
-			present[stu]=sta
-
-	file.close()
-	file=open('Attendance.txt','w')
-	for s in present:
-		w=""
-		if(s==name):
-			w="%s P\n"%(s)
-		else:
-			w="%s %s"%(s,present[s])
-		file.write(w)
+		file.close()
+		file=open('Attendance.txt','w')
+		for s in present:
+			w=""
+			if(s==name):
+				w="%s P\n"%(s)
+			else:
+				w="%s %s"%(s,present[s])
+			file.write(w)
 
 
 
