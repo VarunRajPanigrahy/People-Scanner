@@ -1,5 +1,4 @@
-# import the necessary packages
-#from skimage.measure import structural_similarity as ssim
+
 from skimage import measure
 #import matplotlib.pyplot as plt
 import numpy as np
@@ -25,9 +24,10 @@ def similarity(img1,img2):
 while(True):
 	folder="CTD"
 	test_imgs_list=os.listdir(folder)
+	if(len(test_imgs_list)==0): break
 
 	img_path="CTD/"+test_imgs_list[0]
-	max_sim=0.25
+	max_sim=0.46
 	name="None"
 	students=os.listdir("Training Data")
 	for s in students:
@@ -38,7 +38,7 @@ while(True):
 			if(sim_now>max_sim):
 				max_sim=sim_now
 				name=s
-
+	print(img_path,max_sim,name)
 	os.remove(img_path)
 	if(name==None):continue
 	file=open('Attendance.txt','r')
