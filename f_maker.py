@@ -2,30 +2,19 @@ import cv2
 import os
 
 def FrameCapture(path,saving_path): 
-      
-     
     vidObj = cv2.VideoCapture(path)
-
-   
     count = 0
-  
-     
     success = 1
-
     num=0
   
-    while success: 
-  
-        
+    while success:
         success, image = vidObj.read() 
         tot_img=os.listdir("Frames")
         count=len(tot_img)
         if(num%15==0):
         	cv2.imwrite("%s%d.jpg" % (saving_path, count), image)
-
         	count += 1
         num+=1
-    
 
 folder="C:/Users/Varun Raj/Desktop/Syntax Error"
 video_folder="%s/Video"%(folder)
@@ -39,12 +28,7 @@ while(True):
 		print(v)
 		video="C:/Users/Varun Raj/Desktop/Syntax Error/Video/"+v
 		s=saving_path+"/frame_%d"%(f)
-
 		f+=1
 		FrameCapture(video,s)
 		#os.remove(video)
 	break
-
-
-
-
