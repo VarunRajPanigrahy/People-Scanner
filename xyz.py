@@ -25,28 +25,29 @@ def detect_face(img):
         ret.append(gray[y:y+w, x:x+h])
     return ret
 
-imgs=os.listdir("Frames")
-for i in imgs:
-    
+def crop_face():
+    imgs=os.listdir("Frames")
+    for i in imgs:
+        
 
-    img="Frames/%s"%(i)
-    print(img)
-    try:
-        z=detect_face(img)
-        for x in z:
-            if x is not None:
-               
-                
-                y=cv2.resize(x,(128,128))
+        img="Frames/%s"%(i)
+        print(img)
+        try:
+            z=detect_face(img)
+            for x in z:
+                if x is not None:
+                   
+                    
+                    y=cv2.resize(x,(128,128))
 
-                cv2.imwrite("CTD/%s"%(i),y)
-    except:
-        pass
-    try:
+                    cv2.imwrite("CTD/%s"%(i),y)
+        except:
+            pass
+        try:
+            os.remove(img)
+        except FileNotFoundError:
+            pass
+    imgs=os.listdir("Frames")
+    for i in imgs:
+        img="Frames/%s"%(i)
         os.remove(img)
-    except FileNotFoundError:
-        pass
-imgs=os.listdir("Frames")
-for i in imgs:
-    img="Frames/%s"%(i)
-    os.remove(img)
