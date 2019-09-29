@@ -1,10 +1,10 @@
 import os
-import v_maker
-import f_maker
-import xyz
-import code
+import video_maker
+import frame_maker
+import face_crop
+import predictor
 
-v_maker.make_video()
-f_maker.make_frame()
-xyz.crop_face()
-code.predict_faces()
+video_maker.make_video()
+frame_maker.make_frame()
+face_crop.crop_face()
+predictor.predict_faces()
