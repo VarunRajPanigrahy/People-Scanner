@@ -26,24 +26,24 @@ def FrameCapture(path,saving_path):
         	count += 1
         num+=1
     
+def make_frame():
+    folder="C:/Users/Varun Raj/Desktop/Syntax Error"
+    video_folder="%s/Video"%(folder)
+    saving_path="%s/Frames"%(folder)
+    print(saving_path)
 
-folder="C:/Users/Varun Raj/Desktop/Syntax Error"
-video_folder="%s/Video"%(folder)
-saving_path="%s/Frames"%(folder)
-print(saving_path)
+    f=0
+    while(True):
+    	videos=os.listdir(video_folder)
+    	for v in videos:
+    		print(v)
+    		video="C:/Users/Varun Raj/Desktop/Syntax Error/Video/"+v
+    		s=saving_path+"/frame_%d"%(f)
 
-f=0
-while(True):
-	videos=os.listdir(video_folder)
-	for v in videos:
-		print(v)
-		video="C:/Users/Varun Raj/Desktop/Syntax Error/Video/"+v
-		s=saving_path+"/frame_%d"%(f)
-
-		f+=1
-		FrameCapture(video,s)
-		#os.remove(video)
-	break
+    		f+=1
+    		FrameCapture(video,s)
+    		os.remove(video)
+    	break
 
 
 
