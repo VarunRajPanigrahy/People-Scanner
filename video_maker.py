@@ -10,23 +10,20 @@ def make_video():
 		end_time=time.time()
 		if(int(end_time - star_time)>20):break
 		capture_duration = 5
-
 		cap = cv2.VideoCapture(0)
 		cap.set(cv2.CAP_PROP_FPS, 1)
 		fourcc = cv2.VideoWriter_fourcc(*'XVID')
-		out = cv2.VideoWriter('Video/output_%d.avi'%(x),fourcc,5.0, (640,480))
+		out = cv2.VideoWriter('Video/output_%d.avi'%(x),fourcc,5.5, (720,560))
 		x+=1
 		start_time = time.time()
 		while( int(time.time() - start_time) < capture_duration ):
 		    ret, frame = cap.read()
 		    if ret==True:
 		        out.write(frame)
-		        
-		        #cv2.imshow('frame',frame)
-		    
+		       `cv2.imshow('frame',frame)
+		    #this is a great way to make a video using Open CV in python yet there some bugs to solve 
 		    else:
 		        break
-
 		cap.release()
 		out.release()
 		cv2.destroyAllWindows()
